@@ -24,6 +24,7 @@ scholarly = "^1.7.11"
 nemoguardrails = "^0.9.0"
 langchain-chroma = "^0.1.1"
 gpt4all = "^2.7.0"
+flashrank = "^0.2.5"
 
 
 [build-system]
