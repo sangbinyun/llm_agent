@@ -25,6 +25,8 @@ nemoguardrails = "^0.9.0"
 langchain-chroma = "^0.1.1"
 gpt4all = "^2.7.0"
 flashrank = "^0.2.5"
+free-proxy = "^1.1.1"
+beautifulsoup4 = "^4.12.3"
 
 
 [build-system]
