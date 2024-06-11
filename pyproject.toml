@@ -30,6 +30,7 @@ beautifulsoup4 = "^4.12.3"
 serpapi = "^0.1.5"
 lxml = "^5.2.2"
 fake-useragent = "^1.5.1"
+langchainhub = "^0.1.18"
 
 
 [build-system]
