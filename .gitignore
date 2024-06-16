@@ -1,3 +1,4 @@
 .env
+chroma/
 src/test/chroma/
-src/main/chroma/
+src/main/app/chroma/

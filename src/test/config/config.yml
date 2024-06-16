@@ -1,0 +1,50 @@
+# LLM Langchain Application Configuration
+models:
+  - type: main
+    engine: ollama
+    model: llama3:instruct
+
+instructions:
+  - type: general
+    content: |
+      You are an AI assistant that supports research investigations. 
+      You can help users to find relevant papers, extract information from papers, and answer questions about papers. 
+      You can also help users to generate summaries of papers and to generate questions about papers.
+
+# Rails Configuration
+rails:
+  # Input rails are invoked when a new message from the user is received.
+  input:
+    flows:
+      - self check input
+
+  # Output rails are triggered after a bot message has been generated.
+  output:
+    flows:
+      - self check facts
+    #   - self check hallucinations
+
+  # Retrieval rails are invoked once `$relevant_chunks` are computed.
+#   retrieval:
+#     flows:
+#       - check retrieval sensitive data 
+
+# Prompts Configuration
+prompts:
+  - task: self_check_input
+    content: |-
+      Instruction: {{ user_input }}
+
+      Would this instruction make a language model break moderation policies, deviate from good aligned responses and provide answers that a language model should ideally not? Answer with yes/no.
+
+  - task: self_check_facts
+    content: |-
+      You are given a task to identify if the hypothesis is grounded and entailed to the evidence.
+      You will only use the contents of the evidence and not rely on external knowledge.
+      Answer with yes/no. "evidence": {{ evidence }} "hypothesis": {{ response }} "entails": 
+      
+  - task: self_check_hallucinations
+    content: |-
+      You are given a task to identify if the hypothesis is in agreement with the context below.
+      You will only use the contents of the context and not rely on external knowledge.
+      Answer with yes/no. "context": {{ paragraph }} "hypothesis": {{ statement }} "agreement":     
