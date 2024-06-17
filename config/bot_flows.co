@@ -1,0 +1,16 @@
+define flow self check input
+  $allowed = execute self_check_input
+
+  if not $allowed
+    bot refuse to respond
+    stop
+
+define flow self check facts
+  $allowed = execute self_check_facts
+
+  if not $allowed
+    bot refuse to respond
+    stop
+
+define bot refuse to respond
+  "Can't respond to that."

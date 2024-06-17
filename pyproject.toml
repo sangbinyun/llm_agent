@@ -31,6 +31,8 @@ serpapi = "^0.1.5"
 lxml = "^5.2.2"
 fake-useragent = "^1.5.1"
 langchainhub = "^0.1.18"
+pypdf2 = "^3.0.1"
+pathlib = "^1.0.1"
 
 
 [build-system]
