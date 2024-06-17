@@ -7,6 +7,16 @@ warnings.simplefilter("ignore", category=LangChainDeprecationWarning)
 warnings.filterwarnings('ignore')
 logging.disable(logging.INFO)
 
+# to hide automatic prints
+class HiddenPrints:
+    def __enter__(self):
+        self._original_stdout = sys.stdout
+        sys.stdout = open(os.devnull, 'w')
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        sys.stdout.close()
+        sys.stdout = self._original_stdout    
+
 # import the necessary packages
 import uuid
 import sys, os
@@ -30,7 +40,7 @@ from langchain.chains import RetrievalQA
 from nemoguardrails import RailsConfig, LLMRails
 
 # PATHs
-DATA_PATH="/mnt/c/Users/beene/Downloads/papers/"
+DATA_PATH = ""
 DB_PATH = "./chroma"
 
 # Load or make the client
@@ -46,20 +56,11 @@ llm = Ollama(
     callback_manager = CallbackManager([StreamingStdOutCallbackHandler()]),
 )
 
+# Nemo Guardrails
 def load_guardrails():
-    # Nemo Guardrails
     config = RailsConfig.from_path("./config/config.yml")
     rails = LLMRails(config, llm = llm)
     return rails
-
-class HiddenPrints:
-    def __enter__(self):
-        self._original_stdout = sys.stdout
-        sys.stdout = open(os.devnull, 'w')
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        sys.stdout.close()
-        sys.stdout = self._original_stdout    
 
 # Create a ChatPromptTemplate 
 def create_prompt_template():
@@ -257,6 +258,8 @@ def ask_user_to_create_db():
         if user_input == "n":
             break
         elif user_input == "y":
+            global DATA_PATH
+            DATA_PATH = input("Enter the path to the directory containing PDFs: ")
             implementation_db()
             break
         print("Invalid input. Please enter \'y\' or \'n\'.")
