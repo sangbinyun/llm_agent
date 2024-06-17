@@ -137,7 +137,7 @@ def add_documents_to_db():
     # Create documents and embeddings
     documents = create_documents()
     embeddings = create_embeddings(documents)
-
+    
     # Add the documents and embeddings to the collection
     collection.add(
         ids = [str(uuid.uuid4()) for _ in documents],
