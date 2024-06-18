@@ -1,5 +1,5 @@
 # llm_agent
-LLM application for paper research using LangChain and NVIDIA foundation models 
+A research assistant to find and abstract as many relevant papers as possible using Ollama & Llama3, LangChain, and Nemo-Guardrails.
 
 1. Install all packages in pyproject.toml with poetry
 2. Clone this repository
